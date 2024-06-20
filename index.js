@@ -1,28 +1,35 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-const port = 3000
+const express = require("express");
+const mustacheExpress = require("mustache-express");
+const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+/**
+ * Configuration de mustache
+ * comme moteur de template
+ * pour l'extension .mustache
+ */
+app.engine("mustache", mustacheExpress());
+app.set("view engine", "mustache");
+app.set("views", __dirname + "/views");
 
-// Page d'accueil avec le formulaire
+/**
+ * Configuration de express
+ * pour récupérer les données d'un formulaire
+ * et pour servir les fichiers statiques
+ * (css, js, images, etc.)
+ */
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
-  res.send(`
-    <form action="/mon-formulaire" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name">
-      <button type="submit">Submit</button>
-    </form>
-  `)
+    res.send('Hello <p><a href="/personnages"></a></p>')
+})
+app.get('/personnages', (req, res) => {
+    res.send('Liste des persos')
+})
+app.get('/personnages/:id', (req, res) => {
+    res.send('Liste des persos')
 })
 
-// Route pour gérer le POST du formulaire
-app.post('/mon-formulaire', (req, res) => {
-  const name = req.body.name;
-  res.send('Vous avez soumis le nom : '+name);
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
