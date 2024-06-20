@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un personnage</title>
+</head>
+<body>
+    <form method="post" action="/ajouterPersonnage" enctype="multipart/form-data">
+        <p>
+            <input type="text" name="nom" placeholder="Nom du personnage" required>
+        </p>
+        <p>
+            <textarea name="description" placeholder="Description du personnage"></textarea>
+        </p>
+        <p>
+            Avatar :
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg, image/webp, image/jpg" required>
+        </p>
+        <p>
+            <input type="submit" value="Créer">
+        </p>
+    </form>
+</body>
+</html>
