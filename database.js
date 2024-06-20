@@ -14,4 +14,4 @@ var connection = mysql.createConnection({
     console.log('The solution is: ', results[0].solution);
   });
 
-// Exporter la connexion pour pouvoir l'utiliser dans d'autres modules
+module.exports = connection;
