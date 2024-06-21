@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/global.css" rel="stylesheet" />
     <title>{{personnage.nom}}</title>
 </head>
 <body>
     <h1>{{personnage.nom}}</h1>
     <p>{{personnage.description}}</p>
-    {{#personnage.photo}}
-    <img src="/images/personnages/{{personnage.photo}}" alt="{{personnage.nom}}">
-    {{/personnage.photo}}
-    <p><a href="/personnages">Retour à la liste</a></p>
+    <img class="avatar" src="/images/personnages/{{personnage.photo}}" alt="{{personnage.nom}}">
+    <p><a href="/personnages">Retour à la liste++++</a></p>
 </body>
 </html>

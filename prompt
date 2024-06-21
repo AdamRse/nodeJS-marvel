@@ -1,3 +1,34 @@
+J'utilise node.js avec les modules suivants : express mustache mustache-express mysql @picocss/pico.
+Tout fonctionne, sauf que dans le navigateur rien ne s'actualise. L'application est en locale sur le port 3000. Quand je change quelque chose dans le .mustache, le changement n'apparait pas quand j'actualise le navigateur. Il n'apparait que quand je redémarre node, pourtant nodemon est sensé mettre à jour, ce qu'il fait bien quand j'enregistre un fichier.
+Voilà mon architecture :
+
+/package.json :
+{
+  "name": "nodejs-marvel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@picocss/pico": "^2.0.6",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "mustache": "^4.2.0",
+    "mustache-express": "^1.3.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
+
+
+/index.js :
 const express = require("express"); // Simplifie  les appels serveur
 const mustacheExpress = require("mustache-express");// Externaliser le html (twig)
 const multer = require("multer");// Gère l'upload et le stockage de fichiers uploadés
@@ -69,3 +100,5 @@ app.get('/personnage/:id', (req, res) => {
         }
     });
 });
+
+

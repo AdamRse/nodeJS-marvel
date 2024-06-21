@@ -1,0 +1,39 @@
+//Pour recharger la page automatiquement :
+//npm install --save-dev browser-sync
+//
+//Dans package.json :
+//scripts": {
+//   "test": "echo \"Error: no test specified\" && exit 1",
+//   "start": "node index.js",
+//   "dev": "node browser-sync.js"
+// },
+//
+//npm run dev
+
+const browserSync = require('browser-sync').create();
+const nodemon = require('nodemon');
+
+// Démarrer Nodemon pour recharger le serveur à chaque changement de fichier
+nodemon({
+  script: 'index.js', // Remplacez par votre fichier serveur principal
+  ignore: ['*.js.map'], // Ignorer les fichiers map
+});
+
+// Démarrer Browsersync pour recharger le navigateur à chaque changement de fichier
+browserSync.init({
+  proxy: 'http://localhost:3000', // Assurez-vous que cela correspond à l'adresse de votre serveur
+  files: [
+    'public/css/*.*',  // Surveillez tous les fichiers dans le dossier public/css
+    'views/**/*.mustache', // Surveillez tous les fichiers .mustache dans le dossier views et ses sous-dossiers
+    '*.js'  // Surveillez tous les fichiers JavaScript à la racine
+  ],
+  port: 4000, // Port où Browsersync servira votre site
+  reloadDebounce: 300,// force l'actualisation du navigateur
+});
+
+// Redémarrer Browsersync lorsque Nodemon redémarre le serveur
+nodemon.on('restart', () => {
+  setTimeout(() => {
+    browserSync.reload();
+  }, 500); // Délai pour assurer que le serveur est bien redémarré
+});
